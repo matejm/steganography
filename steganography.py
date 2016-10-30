@@ -1,4 +1,5 @@
 from PIL import Image
+import sys
 
 def hide_core(image_data, secret, size):
     new_image = Image.new('RGBA', size)
@@ -39,8 +40,13 @@ def hide(image_name, new_image_name, secret_name):
         len_of_secret >>= 8
     secret = length_data + secret
 
+    # if is not possible to fit all data into image
+    if len(secret) > image.size[0] * image.size[1]:
+        return False
+
     new_image = hide_core(image_data, secret, image.size)
     new_image.save(new_image_name)
+    return True
 
 def find_core(image_data, size):
     secret = bytearray()
@@ -71,19 +77,33 @@ def find_core(image_data, size):
                 break
     return secret
 
-def find(image_name):
+def find(image_name, secret_name):
     image = Image.open(image_name)
     image_data = image.convert('RGBA').getdata()
 
     secret = find_core(image_data, image.size)
 
-    return secret.decode('utf8')
+    with open(secret_name, 'wb') as f:
+        f.write(secret)
 
 if __name__ == '__main__':
-    # TODO: parse command line arguments
-    image_name = 'image.png'
-    new_image_name = 'image2.png'
-    secret_name = 'secret.txt'
-    hide(image_name, new_image_name, secret_name)
+    args = sys.argv
 
-    print(find(new_image_name))
+    if len(args) == 5 and args[1] == 'hide':
+        image_name = args[2]
+        new_image_name = args[3]
+        secret_name = args[4]
+
+        if not hide(image_name, new_image_name, secret_name):
+            print('Could not fit all secret data into the image.')
+
+    elif len(args) == 4 and args[1] == 'find':
+        image_name = args[2]
+        secret_name = args[3]
+
+        find(image_name, secret_name)
+
+    else:
+        print('usage:\n'
+            + 'python3 steganography.py hide <input_image> <output_image> <secret_file>\n'
+            + 'python3 steganography.py find <input_image> <secret_file_output>')
