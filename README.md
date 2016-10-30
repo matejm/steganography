@@ -1,2 +1,5 @@
-# steganography
-Python program for hiding file into image.
+# Steganography
+Simple python program for hiding text file into least significant bits of image.
+
+# Dependencies
+- [Pillow](https://python-pillow.org/)
