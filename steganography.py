@@ -1,5 +1,7 @@
 from PIL import Image
+import getpass
 import sys
+import crypto
 
 def hide_core(image_data, secret, size):
     new_image = Image.new('RGBA', size)
@@ -25,15 +27,21 @@ def hide_core(image_data, secret, size):
 
     return new_image
 
-def hide(image_name, new_image_name, secret_name):
+def hide(image_name, new_image_name, secret_name, key):
     image = Image.open(image_name)
     image_data = image.convert('RGBA').getdata()
 
     with open(secret_name, 'rb') as f:
         secret = f.read()
 
-    # in first four pixels is length of a  message
     len_of_secret = len(secret)
+
+    if len(secret) != 0:  # length of secret mist be a multiple of 16 for AES
+        secret += b'*' * (16 - len(secret) % 16)
+        # could be a random char
+    secret = crypto.encrypt(secret, key)
+
+    # in first four pixels is length of a  message
     length_data = bytearray()
     while len(length_data) < 4:
         length_data = bytearray([len_of_secret % 256]) + length_data
@@ -49,8 +57,9 @@ def hide(image_name, new_image_name, secret_name):
     return True
 
 def find_core(image_data, size):
-    secret = bytearray()
+    secret = bytes()
     index = 0
+    real_index = 0
     num = 4
 
     for y in range(size[1]):
@@ -70,14 +79,21 @@ def find_core(image_data, size):
                     num -= 1
                     index <<= 8
                     index |= value
+                    if num == 0:
+                        real_index = index
+                        if index % 16 != 0:
+                            index += 16 - (index % 16)
                 else:
-                    secret.append(value)
+                    secret += bytes([value])
                     index -= 1
             else:
                 break
+
+    secret = crypto.decrypt(secret, key)
+    secret = secret[:real_index]
     return secret
 
-def find(image_name, secret_name):
+def find(image_name, secret_name, key):
     image = Image.open(image_name)
     image_data = image.convert('RGBA').getdata()
 
@@ -85,6 +101,7 @@ def find(image_name, secret_name):
 
     with open(secret_name, 'wb') as f:
         f.write(secret)
+
 
 if __name__ == '__main__':
     args = sys.argv
@@ -94,14 +111,16 @@ if __name__ == '__main__':
         new_image_name = args[3]
         secret_name = args[4]
 
-        if not hide(image_name, new_image_name, secret_name):
+        key = crypto.create_key(getpass.getpass('Password:'))
+        if not hide(image_name, new_image_name, secret_name, key):
             print('Could not fit all secret data into the image.')
 
     elif len(args) == 4 and args[1] == 'find':
         image_name = args[2]
         secret_name = args[3]
 
-        find(image_name, secret_name)
+        key = crypto.create_key(getpass.getpass('Password:'))
+        find(image_name, secret_name, key)
 
     else:
         print('usage:\n'

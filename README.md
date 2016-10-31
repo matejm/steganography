@@ -1,8 +1,13 @@
 # Steganography
+
 Simple python program for hiding text file into least significant bits of an image.
 
+
 # Dependencies
+
 - [Pillow](https://python-pillow.org/)
+- [PyCrypto](https://www.dlitz.net/software/pycrypto/)
+
 
 # Usage
 
