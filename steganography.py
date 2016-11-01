@@ -3,12 +3,22 @@ import getpass
 import sys
 import crypto
 
+def progress(current, total):
+    if current == total:
+        print('\rProgress: |' + 20 * '█' + '| 100%')
+        return
+    perc = (100 * current) // total
+    bar = '█' * (20 * perc // 100) + '-' * (20 - 20 * perc // 100)
+    print('\rProgress: |{}| {}%'.format(bar, perc), end=' ')
+
 def hide_core(image_data, secret, size):
     new_image = Image.new('RGBA', size)
     new_image_data = new_image.getdata()
 
     index = 0
     for y in range(size[1]):
+        if y % 10 == 0:
+            progress(y, size[1])
         for x in range(size[0]):
             r, g, b, a = image_data.getpixel((x, y))
 
@@ -52,17 +62,23 @@ def hide(image_name, new_image_name, secret_name, key):
     if len(secret) > image.size[0] * image.size[1]:
         return False
 
+    progress(0, 1)
     new_image = hide_core(image_data, secret, image.size)
     new_image.save(new_image_name)
+    progress(1, 1)
     return True
 
 def find_core(image_data, size):
-    secret = bytes()
+    secret = bytearray()
     index = 0
     real_index = 0
     num = 4
+    found = 0
+    finished = False
 
     for y in range(size[1]):
+        if y % 10 == 9:
+            progress(found, found + index)
         for x in range(size[0]):
             r, g, b, a = image_data.getpixel((x, y))
 
@@ -84,16 +100,22 @@ def find_core(image_data, size):
                         if index % 16 != 0:
                             index += 16 - (index % 16)
                 else:
-                    secret += bytes([value])
+                    secret.append(value)
                     index -= 1
+                    found += 1
             else:
+                finished = True
                 break
+        if finished:
+            break
 
-    secret = crypto.decrypt(secret, key)
+    secret = crypto.decrypt(bytes(secret), key)
     secret = secret[:real_index]
+
     return secret
 
 def find(image_name, secret_name, key):
+    progress(0, 1)
     image = Image.open(image_name)
     image_data = image.convert('RGBA').getdata()
 
@@ -101,6 +123,7 @@ def find(image_name, secret_name, key):
 
     with open(secret_name, 'wb') as f:
         f.write(secret)
+    progress(1, 1)
 
 
 if __name__ == '__main__':
