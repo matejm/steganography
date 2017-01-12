@@ -2,3 +2,4 @@
 image*.png
 secret
 ideas
+docs/_build/*

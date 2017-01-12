@@ -4,6 +4,9 @@ import sys
 import crypto
 
 def progress(current, total):
+    """Simple terminal progress bar.
+    @param current current progress (integer)
+    @param total"""
     if current == total:
         print('\rProgress: |' + 20 * '█' + '| 100%')
         return
@@ -69,6 +72,9 @@ def hide(image_name, new_image_name, secret_name, key):
     return True
 
 def find_core(image_data, size):
+    """
+    Finds assf.s .. .
+    """
     secret = bytearray()
     index = 0
     real_index = 0
@@ -115,6 +121,9 @@ def find_core(image_data, size):
     return secret
 
 def find(image_name, secret_name, key):
+    """
+    Finds secret data in image. The actual thing happens in :func:`steganography.find_core`.
+    """
     progress(0, 1)
     image = Image.open(image_name)
     image_data = image.convert('RGBA').getdata()

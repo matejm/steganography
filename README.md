@@ -7,7 +7,7 @@ Simple python program for hiding text file into least significant bits of an ima
 
 - [Pillow](https://python-pillow.org/)
 - [PyCrypto](https://www.dlitz.net/software/pycrypto/)
-
+- [Sphinx](http://www.sphinx-doc.org/)
 
 # Usage
 
