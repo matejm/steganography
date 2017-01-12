@@ -4,9 +4,8 @@ import sys
 import crypto
 
 def progress(current, total):
-    """Simple terminal progress bar.
-    @param current current progress (integer)
-    @param total"""
+    """Simple terminal progress bar. Be careful when printing other things (use ``\\r``).
+    """
     if current == total:
         print('\rProgress: |' + 20 * '█' + '| 100%')
         return
@@ -15,6 +14,14 @@ def progress(current, total):
     print('\rProgress: |{}| {}%'.format(bar, perc), end=' ')
 
 def hide_core(image_data, secret, size):
+    """
+    Hides secret data in image. The actual thing happens in :func:`steganography.hide_core`.
+
+    :param image_data: PIL Image object.
+    :param secret: ``bytearray`` object wwhich is to be hidden in the image.
+    :param size: Tuple, x and y size of the image.
+    :returns: New PIL Image with hidden and encrypted ``secret``.
+    """
     new_image = Image.new('RGBA', size)
     new_image_data = new_image.getdata()
 
@@ -41,6 +48,15 @@ def hide_core(image_data, secret, size):
     return new_image
 
 def hide(image_name, new_image_name, secret_name, key):
+    """
+    Hides secret data in image. The actual thing happens in :func:`steganography.hide_core`.
+
+    :param image_name: Name of the image where data will be hidden.
+    :param new_image_name: Name of the output image.
+    :param secret_name: Name of file which will be hidden in image.
+    :param key: Hash of encryption password. Use :func:`crypto.create_key`.
+    :returns: ``True`` if everything was successful, else ``False``.
+    """
     image = Image.open(image_name)
     image_data = image.convert('RGBA').getdata()
 
@@ -49,9 +65,10 @@ def hide(image_name, new_image_name, secret_name, key):
 
     len_of_secret = len(secret)
 
-    if len(secret) != 0:  # length of secret mist be a multiple of 16 for AES
+    if len(secret) != 0:  # length of secret must be a multiple of 16 for AES
         secret += b'*' * (16 - len(secret) % 16)
-        # could be a random char
+        # TODO: could be a random char
+
     secret = crypto.encrypt(secret, key)
 
     # in first four pixels is length of a  message
@@ -73,7 +90,11 @@ def hide(image_name, new_image_name, secret_name, key):
 
 def find_core(image_data, size):
     """
-    Finds assf.s .. .
+    Finds hidden data in image.
+
+    :param image_data: PIL Image file.
+    :param size: Tuple, x and y size of the image.
+    :returns: Decrypted found data.
     """
     secret = bytearray()
     index = 0
@@ -115,6 +136,12 @@ def find_core(image_data, size):
         if finished:
             break
 
+    if not finished:
+        pass
+        # TODO
+        # raise InvalidInputImage or something like that
+        # (no data was hidden in this image)
+
     secret = crypto.decrypt(bytes(secret), key)
     secret = secret[:real_index]
 
@@ -123,6 +150,10 @@ def find_core(image_data, size):
 def find(image_name, secret_name, key):
     """
     Finds secret data in image. The actual thing happens in :func:`steganography.find_core`.
+
+    :param image_name: Name of an image with hidden data.
+    :param secret_name: Name of output file where decrypted data is stored.
+    :param key: Hash of encrypted file password. Use :func:`crypto.create_key`.
     """
     progress(0, 1)
     image = Image.open(image_name)

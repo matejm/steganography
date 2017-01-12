@@ -13,3 +13,14 @@ Simple python program for hiding text file into least significant bits of an ima
 
     python3 steganography.py hide <input_image> <output_image> <secret_file>
     python3 steganography.py find <input_image> <secret_file_output>
+
+# Documentation
+
+    cd docs/
+    make html
+
+# Todo
+
+- add GUI
+- implement exceptions
+- speed optimization
