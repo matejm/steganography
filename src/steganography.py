@@ -88,7 +88,7 @@ def hide(image_name, new_image_name, secret_name, key):
     progress(1, 1)
     return True
 
-def find_core(image_data, size):
+def find_core(image_data, size, key):
     """
     Finds hidden data in image.
 
@@ -159,7 +159,7 @@ def find(image_name, secret_name, key):
     image = Image.open(image_name)
     image_data = image.convert('RGBA').getdata()
 
-    secret = find_core(image_data, image.size)
+    secret = find_core(image_data, image.size, key)
 
     with open(secret_name, 'wb') as f:
         f.write(secret)
