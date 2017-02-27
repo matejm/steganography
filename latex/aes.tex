@@ -1,0 +1,22 @@
+AES (Advanced Encryption Standard) je eden najbolj uporabljenih standardov za simetrično enkripcijo. Simetrična enkripcija pomeni, da imata pošiljatelj in prejemnik isti ključ, s katerim kriptirata oziroma dekriptirata sporočilo. 
+
+Algoritem sta razvila belgijska kriptografa Joan Daemen in Vincent Rijmen, ter ga poimenovala Rijndael. Pozneje je standard z manjšimi spremembami prevzela ameriška vlada kot naslednji standard po uporabi DES (Data Encryption Standard), saj so ključi DES postali prekratki in jih je bilo mogoče razbiti z močnejšimi računalniki.
+
+AES je ``substitution-permutation network'', kar pomeni, da glavnino operacij, ki jih opravlja predstavljajo različne zamenjave in permutacije bitov.   
+
+Poleg višje varnosti je glavna prednost standarda AES hitrost. Operacije, ki jih opravlja so nezahtevne, v nasprotju z asimetričnimi kriptiranji. AES pa je v nasprotju z njimi možno zapisati v vezje v procesorju, tako da lahko današnji običajni namizni računalniki kriptirajo AES tudi z več TB/s.
+
+\subsection{Algoritem}
+    Algoritem poenostavljeno sestoji iz štirih korakov, ki se naprej delijo na manjše korake.
+    \begin{enumerate}
+        \item \texttt{KeyExpansions} - razširitve ključa. Ključ, ki je vnaprej določene dolžine se razširi na več ključev, saj AES za vsak krog zahteva svoj ključ.
+        \item \texttt{InitialRound} - dodajanje ključa. Nastavjo se začetna stanja s pomočjo posameznih delov ključa.
+        \item \texttt{Rounds} - del, ki se večkrat ponovi, vsakokrat z novim ključem, ki smo ga razširili iz originalnega ključa. Če je ključ 128-biten se ponovi 10-krat, 12-krat pri 192-bitnih ključih in 14-krat pri 256-bitnih ključih.
+            \begin{enumerate}
+                \item \texttt{SubBytes} - preprosta substitucija znakov z uporabo tabele. Pri tem je pomembno, da ime tabela določene lastnosti, ki naredijo to preslikavo nelinearno, kar zelo oteži razbijanje šifre.
+                \item \texttt{ShiftRows} - operacija na vrsticah trenutnega stanja. Vsak bit v neki vrstici se ciklično zamakne za neko število. Biti iz konca se premaknejo na začetek.
+                \item \texttt{MixColumns} - korak, kjer se stolpci zamenjajo z drugimi stolpci. Vsa stanja v novem stolpcu so neposredno odvisna od vsakega posameznega stanja v prvotnem stolpcu. Če spremenimo en znak, se popolnoma spremeni celoten novi stolpec.
+                \item \texttt{AddRoundKey} - korak skoraj enak postopku v InitialRound. Stanju se doda nov ključ, ki ustreza trenutnemu krogu, z operacijo \texttt{XOR} (ekskluzivni ali).
+            \end{enumerate}
+        \item \texttt{Final Round} - še zadnja ponovitev, ki je skoraj enaka vsem ostalim krogom, edina razlika je, da ne vsebuje koraka \texttt{MixColums}.\cite{wikipedia-aes}
+    \end{enumerate}

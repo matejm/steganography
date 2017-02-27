@@ -1,0 +1,46 @@
+Steganografija je znanost, ki omogoča skrivanje podatkov v navidezno nepomembnem prenosnem mediju. Beseda izhaja iz grščine, in pomeni ``zakrito pisanje''. Predstavlja skupek metod za skrivanje informacij v neke druge informacije. Za razliko od kriptografije oz. šifriranja, ki želi podatke narediti neberljive, steganografija poskuša prikriti, da ti podatki sploh obstajajo \cite{monitor}.
+
+Šibkost kriptografije je, da je sporočilo sumljivo že na prvi pogled. Šibkost steganografije pa je, da ko nekdo enkrat odkrije, kje je sporočilo skrito, ga lahko enostavno prebere. V praksi se zato pogosto uporabljata obe metodi skupaj, saj druga drugi odpravita slabosti.
+
+\subsection{Tehnike}
+    Primeri steganografije so znani že od Antike, različne tehnike pa so se ohranile vse do danes. Z razvojem računalništva se je steganografija razvila tudi na digitalnem področju.\\
+
+    \textbf{Primeri fizičnih tehnik:}
+    \begin{itemize}
+        \item V Stari Grčiji so sporočila skrivali v voščene tablice. Na les so napisali sporočilo, ki so ga nato prekrili z voskom. Na vosek pa so napisali nedolžno in nepomembno sporočilo.
+        \item Drugi postopek, ki so ga uporabljali v Antični Grčiji je bil približno takšen: Sužnju so pobrili glavo in mu vtetovirali sporočilo. Ko so lasje zrasli sporočilo ni bilo več vidno. Očitna pomankljivost te motode je, da moramo počakati, da osebi lasje zrastejo nazaj.
+        \item Sporočilo, ki je napisano z nevidnim črnilom, na nepopisanem delu pisma.
+        \item Sporočilo je v Morsejevi abecedi, napisani na prejo, ki so jo potem vtkali kurirju  v blago.
+        \item Del črk v besedilu je napisan z drugačno pisavo kot druge črke (npr. ležeče). Te črke so tvorile skrivno sporočilo. \cite{wikipedia}
+        \item Nemci so med drugo svetovno vojno uporabljali mikropike (microdots). Podatke so skrivali v znakih, ki jih je bilo mogoče prebrati samo pod veliko povečavo. \cite{monitor}
+        \item Cardanovo rešeto - mreža z odprtinami, s katero prekrijemo besedilo, da se prikaže skrito sporočilo.
+        \item Ameriški pilot Jeremiah Denton, ki ga je ujela vietnamska vojska, je bil med televizijsko konferenco prisiljen pričati, da z njim v ujetništvu ravnajo dobro. Hkrati pa je z mežikanjem v morsejevi abecedi črkoval besedo T-O-R-T-U-R-E (mučenje).\cite{delo}
+    \end{itemize}
+
+    \textbf{Primeri digitalnih tehnik:}
+    \begin{itemize}
+        \item Skrivanje podatkov v najnižje bite slikovnih datotek, z neopaznimi spremembami barv.
+        \item Skrivanje podatkov v zvočni zapis, s spremembami, neslišnimi za človeško uho.
+        \item Tehnika ``pletja in presejanja'' (chaffing and winnowing), kjer gre za to da paketkom, ki gredo čez nezavarovano povezavo dodamo lažne paketke, v katere lahko skrijemo sporočilo.
+        \item Dodajanje podatkov v neuporabljene dele datoteke, npr. na konec.
+        \item Skrivanje z uporabo unicode znakov, ki izgledajo enako kot ASCII znaki.
+        \item Nekateri moderni tiskalniki z težko vidnimi svetlo rumenimi pikami na vsakem listu označijo serijsko številko tiskalnika in čas tiska.
+        \cite{wikipedia}
+    \end{itemize}
+
+\subsection{Steganografija digitalnih fotografij}
+    \label{steganografijaslik}
+    Večja kot je datoteka, v katero nameravamo skriti naše sporočilo, v primerjavi z tem sporočilom, lažje jo je skriti. Zato so slike primerne za steganografijo, saj vsebujejo velike količine podatkov. Tako lahko skrijemo podatke npr. na Internetu. Slika je vsem na očeh, venar se nihče ne zaveda, da so v njej skrite še dodatne informacije. Ni znano, kako pogosta je ta praksa, vendar vemo da obstaja.
+    
+    V RGBA zapisu uporabimo 32 bitov za vsak piksel, to pomeni 8 bitov za vsako komponento. Samo rdeča barva ima $2^8$ različnih intenzivnosti. (Glej poglavje: \nameref{zapisslik}) Razliko med $10111111_{(2)}$ in $10111110_{(2)}$ v inteziteti barve človeško oko zelo težko prepozna. Zato lahko najnižje bite (least significant bits) spremenimo in v njih skrijemo svoje podatke. Če v vsakem pikslu v vseh štirih komponentah spremenimo 2 najmanj pomembna bita, lahko v en piksel skrijemo 1 bajt (8 bitov) podatkov. V celotni sliki lahko, če je dovolj velika, skrijemo tudi več MB podatkov.
+
+    Pri tem je pomembno, da slika, v katero želimo skriti podatke ni enobarvna, oziroma sestavljena iz večjih enobarvnih ploskev. Če je slika takšna, obstaja večja možnost, da kdo opazi različne odtenke sosednjih pikslov na sliki. Zato so slike, ki se uporabljajo za steganografijo pogosto slike narave, živali, ipd.
+
+\subsection{Steganaliza}
+    Steganaliza je veda, ki se ukvarja z zaznavanjem sporočil, skritih s pomčjo steganografije. Pogosto se povezuje s kriptoanalizo. Namen je torej najti sumljiva sporočila, ter ugotoviti ali se v njih skriva skrito sporočilo in, če je možno, prebrati to sporočilo.
+
+    Problema se ponavadi lotimo z statistično analizo. Analiziramo recimo slike, ki so bile posnete z enakim fotoaparatom, ali zvočne posnetke in ugotavljamo skupne značilnosti. Zaradi pogoste izgubne kompresije je predvidljivo, kakšni naj bi bili podatki. V JPEG sliki, naprimer, lahko precej dobro sklepamo, katere barve je piksel, če poznamo vse sosednje piksle. Ker so takšne razporeditve predvidljive, bodo slike, v katerih je skrito stenografsko sporočilo hitreje opazne.
+
+    Najlažje pa je odkriti skrito sporočilo, če imamo na voljo originalno sliko, v kateri ni skritih podatkov, saj bomo hitro opazili razliko in bomo posledično lažje izluščili podatke.
+
+    Še naprednejše metode predpostavijo, da so podatki, ki so skriti poleg tega še kriptirani. Posledica sodobne enkripcije je, da so podatki videti naključni. Večina metod skriva podatke v najmanj pomembne bite (least-significant bits). Če bo razporeditev 1 in 0 v najmanj pomembnih bitih skoraj popolnoma naključna, je velika verjetnost, da je v datoteki skrito kriptirano sporočilo.

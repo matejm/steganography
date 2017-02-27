@@ -1,0 +1,27 @@
+Python je sodobno programski jezik, ki je primeren za razvoj najrazličnejših programov, od preprostih skript do numerično zahtevnih simulacij in sodobnih spletnih aplikacij. Zaradi svoje enostavnosti je postal eden najpriljubljenejših programskih jezikov vseh časov, ter je primeren za učenje programiranja. Python je tolmačen jezik, to pomeni, da se sproti med izvajanjem pretvarja v strojno kodo.\cite{rin} Zato je razmeroma počasnejši od prevajanih jezikov, kot so C++, Java in C\#. V praksi se z uporabo različnih knjižnjic, kot je numpy, njegova hitrost izvajanja lahko približa hitrosti teh jezikov.
+
+    Prednost (in hkrati tudi slabosti Pythona) je uporaba dinamičnih tipov, kar pomeni, da imamo lahko v istu spremenljivki ob različnih časih različne podatkovne tipe. Sintaksa Pythona omogoča, da razvijalci prišejo kodo hitreje kot v drugih programskih jezikih, saj potrebujejo manj vrstic kode kot v konkurenčnih programskih jezikih.
+
+    \subsection{Verzije Pythona}
+        Python trenutno obstaja v dveh glavnih verzijah. To sta 2.x in 3.x (v nadaljevanju tudi Python2 in Python3). Verzija Python3 je novejša, bolj optimizirana, v njej so tudi popravili nekaj pomembnih ``napak'', ki so bile v Python2. Pomembnejše izboljšave v Python3 so:
+        \begin{itemize}
+            \item Podpora Unicode znakov. Unicode znaki so lahko vključeni v nizih in tudi v imenih spremenljivk.
+            \item Pravilnejša implementacija nekaterih delov osrednjih jezika - \texttt{print} in \texttt{exec} nista več stavka (statements), temveč funkciji. Deljenje dveh celih števil vrne racionalno število.
+            \item Optimizacije delovnega spomina - različne funkcije (\texttt{range()}, \texttt{map()}, \texttt{filter()} \ldots) vrnejo iteracijske objekte, namesto da bi ustvarile celotne sezname.
+            \item Besedi \texttt{True} in \texttt{False} sta rezervirani in jih programer ne more več po nesreči spreminjati.
+        \end{itemize}
+
+        Python3 ima veliko prednosti in skoraj nobene slabosti v primerjavi z Python2. Ena od slabosti je, da je za majhna števila malo počasnejši kot Python2, saj ne uporablja tipov \texttt{int} ampak tipe \texttt{long}, ki zahtevajo več spomina in novejše procesorje.
+
+
+    \subsection{Knjižnjice}
+        Python-ova standardna knjižnjica je razmeroma velika, že vsebuje orodja za veliko različnih nalog. Vsebuje že knjižnjice za izdelavo preprostih internetnih aplikacij, grafičnih vmesnikov in tudi knjižnjici za poganjanje testov.
+
+        Veliko programov pa ni vklučenih v Pythonovo standardno knjižnjico, vendar jih je veliko vključenih v PyPI (Python Package Index), kjer je trenutno (februarja 2017) 99610 različnih paketov. Z različnimi moduli si poenostavimo pisanje programa, saj nam ni treba ponovno implementirati celotnih funkcij, ki bi jih potrevali. Nekateri moduli pa nam omogočijo stvari, ki jih v ``čistem Pythonu'' sploh ne moremo napisati, oziroma so napisani deloma v drugem programskem jeziku zato, da se naš program izvaja hitreje.
+
+        Pomembnejše knjižnjice za izdelavo programa steganografije slik:
+        \begin{description}
+            \item [Pillow:] Knjžnjica za delo z različnimi formati slik. Povzeta po knjižnjici \texttt{PIL} (Python Imaging Library), ki je napisana za Python verzije 2.x, medtem ko je Pillow namenjena za verzije 3.x.  
+            \item [PyCrypto] Zbirka varnih hash funkcij in različnih kriptirnih algoritemov (RSA, AES, DES\ldots).
+            \item [Tkinter] Pythonova standardna knjižnjica za izdelavo grafičnega uporabniškega vmesnika (GUI).
+        \end{description}
