@@ -46,7 +46,7 @@ class GUI(tk.Frame):
 
         self.hide_button = tk.Button(self, text='Hide', command=self.hide)
         self.find_button = tk.Button(self, text='Find', command=self.find)
-        hide_success = StringVar()
+        hide_success = tk.StringVar()
         self.hide_success_label = tk.Label(self, textvariable=hide_success)
         self.hide_button.grid(row=6, column=0, columnspan=2)
         self.find_button.grid(row=6, column=1, columnspan=2)

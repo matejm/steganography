@@ -1,8 +1,8 @@
 **/__pycache__/**
-image*.png
 secret
 ideas
 docs/_build/*
 *.aux
 *.log
 *.toc
+_minted*
