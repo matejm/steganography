@@ -3,3 +3,6 @@ image*.png
 secret
 ideas
 docs/_build/*
+*.aux
+*.log
+*.toc
