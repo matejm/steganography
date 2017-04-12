@@ -31,7 +31,7 @@ Steganografija je znanost, ki omogoča skrivanje podatkov v navidezno nepomembne
 \subsection{Steganografija digitalnih fotografij}
     \label{steganografijaslik}
     Večja kot je datoteka, v katero nameravamo skriti naše sporočilo, v primerjavi z tem sporočilom, lažje jo je skriti. Zato so slike primerne za steganografijo, saj vsebujejo velike količine podatkov. Tako lahko skrijemo podatke npr. na Internetu. Slika je vsem na očeh, venar se nihče ne zaveda, da so v njej skrite še dodatne informacije. Ni znano, kako pogosta je ta praksa, vendar vemo da obstaja.
-    
+
     V RGBA zapisu uporabimo 32 bitov za vsak piksel, to pomeni 8 bitov za vsako komponento. Samo rdeča barva ima $2^8$ različnih intenzivnosti. (Glej poglavje: \nameref{zapisslik}) Razliko med $10111111_{(2)}$ in $10111110_{(2)}$ v inteziteti barve človeško oko zelo težko prepozna. Zato lahko najnižje bite (least significant bits) spremenimo in v njih skrijemo svoje podatke. Če v vsakem pikslu v vseh štirih komponentah spremenimo 2 najmanj pomembna bita, lahko v en piksel skrijemo 1 bajt (8 bitov) podatkov. V celotni sliki lahko, če je dovolj velika, skrijemo tudi več MB podatkov.
 
     Pri tem je pomembno, da slika, v katero želimo skriti podatke ni enobarvna, oziroma sestavljena iz večjih enobarvnih ploskev. Če je slika takšna, obstaja večja možnost, da kdo opazi različne odtenke sosednjih pikslov na sliki. Zato so slike, ki se uporabljajo za steganografijo pogosto slike narave, živali, ipd.

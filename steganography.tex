@@ -8,28 +8,45 @@
 
 \graphicspath{{images/}}
 
-\title{
-    Programiranje v Pythonu\\\large
-    Izdelava programa za steganografijo slik}
-\author{Matej Marinko}
-\date{februar 2017}
-
 
 \addbibresource{latex/viri.bib}
 
 \begin{document}
-    \maketitle
+
+    \begin{titlepage}
+    	\centering
+    	\includegraphics[width=0.3\textwidth]{gimvic_logo.png}\par
+    	{\Large Gimnazija vič \par}
+    	\vspace{1cm}
+        {\huge\bfseries Programiranje v Pythonu\par}
+    	\vspace{0.5cm}
+        {\scshape\Large Seminarska naloga pri predmetu informatika\par}
+    	\vspace{2cm}
+        {\Large Mentor: prof. Klemen Bajec\par}
+    	{\Large Avtor: Matej Marinko\par}
+    	\vfill
+
+    	{\large Ljubljana, marec 2017\par}
+    \end{titlepage}
+
+
     \thispagestyle{empty}
     \newpage
 
-    % \begin{abstract}
-    % \end{abstract}
-    % \newpage
+    \begin{abstract}
+    \noindent Namen naloge je izdelati program za steganografijo digitalnih fotografij. V prvem delu seminarske naloge je razloženo, kaj je steganografija in njeni primeri skozi čas. V nadaljevanju je še druga teorija, ki je pomembna za razumevanje in izdelavo programa. To so osnove zapisa sliku v računalniku, simetrična enkripcija enkripcija in programski jezik Python. Sledi praktični del naloge. Ker je celoten program razmeroma obsežen ter zato ni primerno, da bi bil natančno predstavljen v celoti, so podrobneje razložene samo nekateri njegovi pomembnejši deli. Namen seminarske naloge je bil dosežen, saj je bil napisan program za steganografijo slik, ki zadovoljivo deluje.
+    \\
+
+    \noindent \textbf{Ključne besede:} steganografija, kriptografija, programski jezik Python
+    \end{abstract}
+
+
+    \newpage
 
     \tableofcontents
     \newpage
 
-    \section{Uvod} 
+    \section{Uvod}
         \input{latex/uvod.tex}
 
     \newpage
@@ -37,7 +54,7 @@
     \section{Steganografija}
         \input{latex/steganografija.tex}
 
-          
+
     \section{Zapis slik v računalniku}
         \input{latex/zapis_slik.tex}
 
@@ -49,7 +66,7 @@
         \input{latex/python.tex}
 
     \section{Izdelava programa}
-        \input{latex/programiranje.tex}        
+        \input{latex/programiranje.tex}
 
     \newpage
     \section{Zaključek}
@@ -57,6 +74,5 @@
 
     \newpage
     \printbibliography
-     
-\end{document}
 
+\end{document}

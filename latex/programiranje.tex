@@ -5,12 +5,12 @@
 
     \inputminted[firstline=1, lastline=2, frame=lines]{bash}{latex/bashscripts.sh}
 
-    Za pisanje kode sem uporabljal odprtokodni program Atom (\texttt{https://atom.io/}), za upravljanje verzij pa program Git, v povezavi z shrambo v oblaku Github (\texttt{www.github.com}). 
+    Za pisanje kode sem uporabljal odprtokodni program Atom (\texttt{https://atom.io/}), za upravljanje verzij pa program Git, v povezavi z shrambo v oblaku Github (\texttt{www.github.com}).
 
 
 \subsection{Pridobivanje podatkov}
 
-    Program od uporabnika pridobi podatke, v katero sliko želi skriti podatke in datoteko s podatki, ki jo želi skriti. Po mojem mnenju je veliko bolje, če lahko v sliko skrijemo katere koli podatke, ne samo besedila. Ko program pridobi ime datoteke, jo odpre kot \texttt{bytes} objekt z imenom \texttt{secret}. 
+    Program od uporabnika pridobi podatke, v katero sliko želi skriti podatke in datoteko s podatki, ki jo želi skriti. Po mojem mnenju je veliko bolje, če lahko v sliko skrijemo katere koli podatke, ne samo besedila. Ko program pridobi ime datoteke, jo odpre kot \texttt{bytes} objekt z imenom \texttt{secret}.
 
     \inputminted[firstline=1, lastline=2, frame=lines]{python}{latex/code_parts.py}
 
@@ -19,7 +19,7 @@
 
 \subsection{Pridobivanje gesla}
 
-    Program uporabnika vpraša za geslo, s katerim želi zakriptirati datoteko. Ker v običajnem načinu terminala lahko vidimo, kaj uporabnik vpisuje v terminal, ampak ne želimo, da se vidi tudi geslo, moramo v brezgrafičnem načinu uporabiti posebno Pythonovo knjižnjico \texttt{getpass}.  
+    Program uporabnika vpraša za geslo, s katerim želi zakriptirati datoteko. Ker v običajnem načinu terminala lahko vidimo, kaj uporabnik vpisuje v terminal, ampak ne želimo, da se vidi tudi geslo, moramo v brezgrafičnem načinu uporabiti posebno Pythonovo knjižnjico \texttt{getpass}.
 
     \inputminted[firstline=4, lastline=5, frame=lines]{python}{latex/code_parts.py}
 
@@ -79,7 +79,7 @@
 
     $$(2^8)^4 = 256^4 = 4294967296 > 4 \cdot 10^9$$
 
-    Pri velikosti slik, ki so danes nekaj čez 10 mio pikslov je torej dovolj, da si podatke o dolžini zapomnimo v samo 4 pikslih. 
+    Pri velikosti slik, ki so danes nekaj čez 10 mio pikslov je torej dovolj, da si podatke o dolžini zapomnimo v samo 4 pikslih.
 
     \inputminted[firstline=55, lastline=87, frame=lines]{python}{latex/code_parts.py}
 
