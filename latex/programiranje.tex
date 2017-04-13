@@ -40,7 +40,7 @@
 
 \subsection{Kriptiranje podatkov}
 
-    Glavni del AES kriptiranja bo za nas opravila knjižnjica \texttt{PyCrypto}, saj je njihova implementacija kriptiranja zagotovo bolj pravilna od takšne, ki bi jo napisal jaz. Sama koda je popolnoma preprosta, vse se zgodi v funkciji \texttt{encrypt(message, key)}, pri čemer je \texttt{message} sporočilo, ki ga želomo zakriptirati, \texttt{key} pa je \texttt{sha256 hash} gesla.
+    Glavni del AES kriptiranja bo za nas opravila knjižnjica \texttt{PyCrypto}, saj je njihova implementacija kriptiranja zagotovo bolj pravilna od takšne, ki bi jo napisal jaz. Sama koda je popolnoma preprosta, vse se zgodi v funkciji \texttt{encrypt(message, key)}, pri čemer je \texttt{message} sporočilo, ki ga želimo zakriptirati, \texttt{key} pa je \texttt{sha256 hash} gesla.
 
     \inputminted[firstline=17, lastline=19, frame=lines]{python}{latex/code_parts.py}
 
@@ -83,7 +83,7 @@
 
     \inputminted[firstline=55, lastline=87, frame=lines]{python}{latex/code_parts.py}
 
-    Potem, ko imamo podatke o dolžini skritega sporočila, samo dodajamo najdene podatke na seznam \texttt{secret}. Ko pridobimo vse podatke, pa moramo seznam še dekriptirati in dobimo sporočilo. Ker sporočilo ni nujno samo tekstovno, ga namesto, da bi ga izpisali na zaslonu, shranimo v datoteko, ki jo je poimenoval uporabnik. Zato lahko na ta način v eno sliko lahko skrijemo ne le preprostega besedila, ampak tudi druge dokumente ali celo druge slikovne datoteke.
+    Potem, ko imamo podatke o dolžini skritega sporočila, samo dodajamo najdene podatke na seznam \texttt{secret}. Ko pridobimo vse podatke, pa moramo seznam še dekriptirati in dobimo sporočilo. Ker sporočilo ni nujno samo tekstovno, ga namesto, da bi ga izpisali na zaslonu, shranimo v datoteko, ki jo je poimenoval uporabnik. Zato lahko na ta način v eno sliko skrijemo ne samo preprosto besedila, ampak tudi druge dokumente ali celo druge slikovne datoteke.
 
 
 \subsection{Primer uporabe programa}
@@ -91,7 +91,6 @@
     \includegraphics[width=0.5\textwidth]{image_with_hidden_data.png}
 
     Leva fotografija je samo fotografija čebele na cvetu, velika 400x300 slikovnih točk. Desna slika ji je na prvi pogled enaka, vendar je v njej skrito $10 000$ besed vzorčnega teksta (\textit{Lorem ipsum dolor sit amet\ldots}), zakriptiranih z geslom ``\texttt{geslo}''. Velikost datoteke, ki smo jo skrili je bila 68,1 kB. Prva slika je velika 254,5kB, druga pa 273,3 kB. Sliki se razlikujeta v velikosti, saj zaradi skritih podatkov v najnižjih bitih stiskanje podatkov ni bilo več tako zelo učinkovito. Razlika v velikosti v tem primeru ni bistvena, saj je prva slika že dovolj ``nepravilna'', da že prej ni bilo mogoče slike popolnoma stisniti. Če bi podatke skrivali v sliko, ki bi bila enobarvna, potem bi se velikost spremenila še bolj, poleg tega pa bi bilo s prostim očesom možno opaziti, da je v sliki nekaj skrito (slika ne bi bila več enbarvna, temveč bi bili sosednji piksli med seboj rahlo različnih barv).
-
 
     Program lahko uporabljamo na dva različna načina: v grafičnem načinu, ter v načinu ukazne vrstice.
 
